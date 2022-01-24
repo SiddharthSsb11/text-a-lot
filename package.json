@@ -1,0 +1,15 @@
+{
+  "name": "text-a-lot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "author": "Siddharth Singh Bhadoriya",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^14.2.0",
+    "express": "^4.17.2"
+  }
+}
