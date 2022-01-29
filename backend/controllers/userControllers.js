@@ -76,7 +76,7 @@ const registerUser = asyncHandler(async (req, res) => {
     password, //mongoose mw to encrypt it before saving(creating) this doc in db//pre-save hook MW
   });
 
-  //console.log("created user on signup",user);
+  //console.log("created user on signup",user)
 
   if (user) {
     res.status(201).json({
