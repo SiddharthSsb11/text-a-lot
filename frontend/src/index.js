@@ -1,9 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import ChatProvider from "./Context/ChatProvider";
 import { BrowserRouter } from "react-router-dom";
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider } from "@chakra-ui/react";
 
 /* import { extendTheme } from "@chakra-ui/react"
 
@@ -20,9 +21,12 @@ const theme = extendTheme({
  */
 
 ReactDOM.render(
-  <BrowserRouter> 
-    <ChakraProvider > 
-      <App /> 
-    </ChakraProvider> 
-  </BrowserRouter>, document.getElementById('root')
+  <BrowserRouter>
+    <ChatProvider>
+      <ChakraProvider>
+        <App />
+      </ChakraProvider>
+    </ChatProvider>
+  </BrowserRouter>,
+  document.getElementById("root")
 );
