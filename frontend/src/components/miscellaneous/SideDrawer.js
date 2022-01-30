@@ -68,7 +68,7 @@ const SideDrawer = () => {
       };
 
       const { data } = await axios.get(`/api/user?search=${search}`, config);
-      console.log(data, 'searchQuerry keyword response data');
+      //console.log(data, 'searchQuerry keyword response data');
 
       setLoading(false);
       setSearchResult(data);
@@ -91,7 +91,7 @@ const SideDrawer = () => {
   
 
   const accessChat = async (userId) => {
-    console.log(userId);
+    //console.log(userId); id of selected user
 
     try {
       setLoadingChat(true);
@@ -103,10 +103,13 @@ const SideDrawer = () => {
       };
       const { data } = await axios.post(`/api/chat`, { userId }, config);
 
-      console.log(data, 'access chat response data')
-      if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]); //already existing check clause
+      if (!chats.find((chat) => chat._id === data._id)) setChats([data, ...chats]); //already existing check clause
+
 
       setSelectedChat(data);
+
+      console.log(data, 'access new/existing chat response data');
+
       setLoadingChat(false);
       onClose(); //drawer close afterwards
     } catch (error) {
@@ -116,7 +119,7 @@ const SideDrawer = () => {
         title: "Error fetching the chat",
         description: error.message,
         status: "error",
-        duration: 5000,
+        duration: 3000,
         isClosable: true,
         position: "bottom-left",
       });

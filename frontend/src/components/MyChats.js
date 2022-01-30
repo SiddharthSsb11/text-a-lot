@@ -6,9 +6,8 @@ import axios from "axios";
 import ChatContext from "../Context/chat-context";
 import { getSender } from "../config/ChatLogics";
 import ChatLoading from "./ChatLoading";
-import GroupChatModal from "./miscellaneous/GroupChatModal";
+//import GroupChatModal from "./miscellaneous/GroupChatModal";
 import { Button } from "@chakra-ui/react";
-//import { ChatState } from "../Context/ChatProvider";
 
 const MyChats = ({ fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState();
@@ -28,6 +27,8 @@ const MyChats = ({ fetchAgain }) => {
 
       const { data } = await axios.get("/api/chat", config);
       setChats(data);
+      console.log(data, 'fetching all users chats in my chats');
+
     } catch (error) {
       toast({
         title: "Error Occured!",
@@ -41,7 +42,7 @@ const MyChats = ({ fetchAgain }) => {
   };
 
   useEffect(() => {
-    setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
+    setLoggedUser(JSON.parse(localStorage.getItem("userInformation")));
     fetchChats();
     // eslint-disable-next-line
   }, [fetchAgain]);
@@ -68,7 +69,7 @@ const MyChats = ({ fetchAgain }) => {
         alignItems="center"
       >
         My Chats
-        <GroupChatModal>
+
           <Button
             d="flex"
             fontSize={{ base: "17px", md: "10px", lg: "17px" }}
@@ -76,7 +77,7 @@ const MyChats = ({ fetchAgain }) => {
           >
             New Group Chat
           </Button>
-        </GroupChatModal>
+        
       </Box>
       <Box
         d="flex"
@@ -91,6 +92,7 @@ const MyChats = ({ fetchAgain }) => {
         {chats ? (
           <Stack overflowY="scroll">
             {chats.map((chat) => (
+              
               <Box
                 onClick={() => setSelectedChat(chat)}
                 cursor="pointer"
