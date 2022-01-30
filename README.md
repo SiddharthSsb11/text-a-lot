@@ -67,6 +67,14 @@ https://textalot.herokuapp.com/
 
 ## Usage
 
+**Test users**
+
+| Email | Password  |
+| -------- | --------- |
+| kohli@test.com | kohlitest |
+
+``` Or Use the guest user login feature.  ```
+
 ### Clone the repository:
 ```
 git clone https://github.com/SiddharthSsb11/MERN-chat-app.git
