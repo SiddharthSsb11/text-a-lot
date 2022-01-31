@@ -90,7 +90,7 @@ const SideDrawer = () => {
 
   
 
-  const accessChat = async (userId) => {
+  const accessChatCreateChat = async (userId) => {
     //console.log(userId); id of selected user
 
     try {
@@ -103,8 +103,8 @@ const SideDrawer = () => {
       };
       const { data } = await axios.post(`/api/chat`, { userId }, config);
 
-      if (!chats.find((chat) => chat._id === data._id)) setChats([data, ...chats]); //already existing check clause
-
+      if (!chats.find((chat) => chat._id === data._id)) setChats([data, ...chats]); 
+      //already existing check clause //newly created chat above the rest
 
       setSelectedChat(data);
 
@@ -135,13 +135,13 @@ const SideDrawer = () => {
         w="100%"
         p="5px 10px 5px 10px"
         borderWidth="5px"
-        borderColor="blue.600"
-        bg="cyan.300"
+        borderColor="purple.600"
+        bg="yellow.400"
         color="black"
       >
         <Tooltip label="Search Users to chat" hasArrow placement="bottom-end">
-          <Button variant="ghost" bg ='blue.500' onClick={onOpen} 
-            _hover={{ background: "purple.400" }} _active={{ background: "purple.400" }}>
+          <Button variant="ghost" bg ='blue.700' onClick={onOpen} color="white"
+            _hover={{ background: "purple.800", color:"yellow.400" }} _active={{ background: "purple.800", color:"yellow.400" }}>
               <i className="fas fa-search"></i>
               <Text d={{ base: "none", md: "flex" }} px={4} fontWeight="bold">
                 Search User
@@ -149,22 +149,22 @@ const SideDrawer = () => {
           </Button>
         </Tooltip>
 
-        <Text fontSize="3xl" fontFamily="Work sans bold" fontWeight='bold' color="blue.700" >
+        <Text fontSize="3xl" fontFamily="Work sans bold" fontWeight='bold' color="purple.700" >
           Text-A-Lot
         </Text>
 
         <div>
           <Menu>
             <MenuButton p={1}>
-              <BellIcon fontSize="2xl" m={1} color="blue.600"/>
+              <BellIcon fontSize="2xl" m={1} color="blue.700"/>
             </MenuButton>
           </Menu>
           <Menu>
-            <MenuButton as={Button} bg="blue.600"  rightIcon={<ChevronDownIcon />}  
-              _hover={{ background: "purple.500" }} _active={{ background: "purple.500" }}>
+            <MenuButton as={Button} bg="blue.700"  rightIcon={<ChevronDownIcon />}  
+              _hover={{background: "purple.800", color:"yellow.400"}} _active={{background: "purple.800", color:"yellow.400"}}>
               <Avatar size="sm" cursor="pointer" name={user.name} borderColor="black" borderWidth="2px" bg="yellow.400" color="black"/>
             </MenuButton>
-            <MenuList bg = "purple.500" borderColor="black" borderWidth="2px">
+            <MenuList bg = "purple.600" borderColor="black" borderWidth="2px">
               <ProfileModal user={user}>
                 <MenuItem fontWeight="bold" color="black" _hover={{background: "yellow.400"}} >
                   My Profile
@@ -199,7 +199,7 @@ const SideDrawer = () => {
                 <UserListItem
                   key={user._id}
                   user={user}
-                  handleFunction={() => accessChat(user._id)}
+                  handleFunction={() => accessChatCreateChat(user._id)}
                 />
               ))
             )} 
