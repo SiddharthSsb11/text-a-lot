@@ -26,10 +26,11 @@ function App() {
               {" "}
               {
                 <Spinner
-                  thickness="4px"
+                  margin="auto"
+                  thickness="6px"
                   speed="0.65s"
-                  emptyColor="purple.800"
-                  color="yellow.400"
+                  emptyColor="gray.200"
+                  color="red.500"
                   size="xl"
                 />
               }{" "}
