@@ -43,17 +43,13 @@ const MyChats = ({ fetchAgain }) => {
     }
   };
 
-/*   useEffect(() => {
-    setLoggedUser(JSON.parse(localStorage.getItem("userInformation"))); //chatLogics 
-    fetchChats();
-    // eslint-disable-next-line
-  }, []); */
+
 
   useEffect(() => {
     setLoggedUser(JSON.parse(localStorage.getItem("userInformation"))); //chatLogics 
     fetchChats();
     // eslint-disable-next-line
-  }, []);
+  }, [fetchAgain]);
   //fetching chats again witht the updated list of all of our chats...
   //--when we leave a group our updated list of chats needs to be fetched again
 
