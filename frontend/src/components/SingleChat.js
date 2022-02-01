@@ -23,7 +23,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   const { selectedChat, setSelectedChat, user } = useContext(ChatContext);
   //console.log(selectedChat, "selectedChat in chatBox");
-  //const {getSender}=useHelper();
+  
 
 
   const typingHandler = (e) => {

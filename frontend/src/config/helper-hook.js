@@ -20,10 +20,8 @@ export const useHelper = ()=>{
     return chatName[i];
   };
 
-  const refresh = ()=>{
-      console.log('refresh');
-  }
+ 
 
-  return {getSender, refresh} ;
+  return {getSender,} ;
 
 }
