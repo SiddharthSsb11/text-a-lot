@@ -23,7 +23,7 @@ const accessChat = asyncHandler(async (req, res) => {
     .populate("users", "-password")
     .populate("latestMessage");
 
-  //inside latestchat populating with the user in that latestMessage.sender in our chat doc
+  //populating with the user in that latestMessage.sender in our chat doc
   isChat = await User.populate(isChat, {
     path: "latestMessage.sender",
     select: "name email",
@@ -32,7 +32,7 @@ const accessChat = asyncHandler(async (req, res) => {
   if (isChat.length > 0) {
     res.send(isChat[0]);
     //1on1chat
-  } else {
+  } else {//as per schema
     var chatData = {
       chatName: "sender", //just any string data
       isGroupChat: false,
@@ -44,10 +44,7 @@ const accessChat = asyncHandler(async (req, res) => {
       const createdChat = await Chat.create(chatData);
       //console.log(createdChat, 'created and stored newChat')
 
-      const fullChat = await Chat.findOne({ _id: createdChat._id }).populate(
-        "users",
-        "-password"
-      );
+      const fullChat = await Chat.findOne({ _id: createdChat._id }).populate("users", "-password");
       //console.log(fullChat, 'sending the created chat after populating both the user data inside the users[]');
 
       res.status(200).json(fullChat);
@@ -64,6 +61,7 @@ const accessChat = asyncHandler(async (req, res) => {
 
 const fetchChats = asyncHandler(async (req, res) => {
   try {
+
     Chat.find({ users: { $elemMatch: { $eq: req.user._id } } })
       .populate("users", "-password")
       .populate("groupAdmin", "-password")
@@ -147,11 +145,13 @@ const renameGroup = asyncHandler(async (req, res) => {
 const removeFromGroup = asyncHandler(async (req, res) => {
   const { chatId, userId } = req.body;
 
-  // check if the requester is admin
+  // check if the request is sent from admin on FE
 
   const removed = await Chat.findByIdAndUpdate( chatId, { $pull: { users: userId } }, { new: true } )
     .populate("users", "-password")
     .populate("groupAdmin", "-password");
+
+  //console.log(removed);  
 
   if (!removed) {
     res.status(404);
@@ -174,6 +174,8 @@ const addToGroup = asyncHandler(async (req, res) => {
     .populate("users", "-password")
     .populate("groupAdmin", "-password");
 
+  //console.log(added);
+    
   if (!added) {
     res.status(404);
     throw new Error("Chat Not Found");
