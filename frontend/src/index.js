@@ -21,7 +21,7 @@ const theme = extendTheme({
  */
 
 ReactDOM.render(
-  <BrowserRouter>
+  <BrowserRouter forceRefresh={true}>
     <ChatProvider>
       <ChakraProvider>
         <App />

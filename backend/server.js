@@ -1,4 +1,4 @@
-//const path = require("path");
+const path = require("path");
 const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
@@ -21,7 +21,7 @@ app.use("/api/message", messageRoutes);
 
 
 //deployment
-/* const __dirname1 = path.resolve();
+const __dirname1 = path.resolve();
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname1, "/frontend/build")));
@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === "production") {
   app.get("/", (req, res) => {
     res.send("API is running..");
   });
-} */
+}
 
 /* NODE_ENV=production *///add it in env
 
@@ -41,10 +41,10 @@ if (process.env.NODE_ENV === "production") {
 app.use(notFound);
 app.use(errorHandler);
  
-app.get('/', (req, res) => {
+/* app.get('/', (req, res) => {
     //console.log('hello from server');
     res.send('Api running');
-})
+}) */
 
 const PORT = process.env.PORT || 5000;
 

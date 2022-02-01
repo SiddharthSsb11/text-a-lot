@@ -92,7 +92,7 @@ const UpdateGroupChatModal = ({  fetchAgain, setFetchAgain }) => {
       console.log(data._id, data, "renaming group chat resposne");
       // setSelectedChat("");
       setSelectedChat(data);
-      setFetchAgain(!fetchAgain);
+      setFetchAgain(!fetchAgain); //window.location.reload()
       setRenameLoading(false);
 
     } catch (error) {

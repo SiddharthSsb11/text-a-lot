@@ -18,7 +18,7 @@ const ChatProvider = (props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [navigate]);
     
-    console.log(chats, 'chats context')
+    //console.log(chats, 'chats context')
     return (
         <div>
             <ChatContext.Provider value = {{ user, setUser, selectedChat, setSelectedChat, chats, setChats }}> 

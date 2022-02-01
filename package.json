@@ -17,6 +17,8 @@
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.8",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "path-browserify": "^1.0.1",
+    "util": "^0.12.4"
   }
 }
