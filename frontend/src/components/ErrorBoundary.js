@@ -25,30 +25,31 @@ function ErrorFallback({ error, resetErrorBoundary }) {
         borderWidth="2px"
         borderColor="black"
       >
-        <AlertIcon boxSize="40px" mr={0} color="white" />
-        <AlertTitle mt={4} mb={1} fontSize="2xl">
-          Your chats 📥 are Loading ⌛
+        <AlertIcon boxSize="45px" mr={0} color="white" />
+        <AlertTitle mt={5} fontSize="3xl">
+          Your chats are Loading ⌛
         </AlertTitle>
         <Spinner
-          m={4}
+          m={6}
           thickness="6px"
           speed="0.99s"
           emptyColor="gray.200"
           color="yellow.400"
           size="xl"
         />
-        <AlertDescription  maxWidth="sm" color="white">
-          ( Still ⌛..Click on the Button Below ⬇️ )
+        <AlertDescription  maxWidth="md" color="white">
+          ( Still ⌛ Click on the Button Below ⬇️ )
         </AlertDescription>
         <Button
+          fontWeight="bold"  
           variant="ghost"
           bg="yellow.300"
-          mt={6}
+          mt={7}
           color="black"
           borderColor="black"
           onClick={resetErrorBoundary}
-          _hover={{ background: "green.500", color: "white" }}
-          _active={{ background: "green.500", color: "white" }}
+          _hover={{ background: "pink.500", color: "white" }}
+          _active={{ background: "pink.500", color: "white" }}
         >
           Continue Texting ➡️
         </Button>

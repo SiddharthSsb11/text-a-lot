@@ -1,7 +1,7 @@
 import { FormControl } from "@chakra-ui/form-control";
 import { Input } from "@chakra-ui/input";
 import { Box, Text } from "@chakra-ui/layout";
-//import "./styles.css";
+import "./styles.css";
 import { IconButton, Spinner, useToast } from "@chakra-ui/react";
 import { getSender, getSenderFull } from "../config/ChatLogics";
 //import { useHelper } from '../config/helper-hook';
@@ -9,6 +9,7 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import ProfileModal from "./miscellaneous/ProfileModal";
+import ScrollableChat from "./ScrollableChat";
 import UpdateGroupChatModal from "./miscellaneous/UpdateGroupChatModal";
 import ChatContext from "../Context/chat-context";
 /* const ENDPOINT = "http://localhost:5000"; // "https://textalot.herokuapp.com"; -> After deployment
@@ -23,12 +24,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   const { selectedChat, setSelectedChat, user } = useContext(ChatContext);
   //console.log(selectedChat, "selectedChat in chatBox");
-  
-
 
   const typingHandler = (e) => {
     setNewMessage(e.target.value);
-  } 
+  };
 
   const fetchMessages = async () => {
     if (!selectedChat) return;
@@ -40,14 +39,15 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
       setLoading(true);
 
-      const { data } = await axios.get( `/api/message/${selectedChat._id}`, config );
+      const { data } = await axios.get(
+        `/api/message/${selectedChat._id}`,
+        config
+      );
 
       setMessages(data);
       setLoading(false);
       console.log(data, "fetched messsages of the selected chat data");
-
     } catch (error) {
-
       console.log(error.message);
       toast({
         title: "Error Occured!",
@@ -61,7 +61,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   };
 
   const sendMessage = async (event) => {
-
     if (event.key === "Enter" && newMessage) {
       try {
         const config = {
@@ -71,7 +70,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           },
         };
 
+        //async func -- wont make newMessage empty instantaneously
+        //ui enhancement -- input to be empty as soon as we hit ender/send
         setNewMessage("");
+
         const { data } = await axios.post(
           "/api/message",
           {
@@ -84,9 +86,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         //setNewMessage("");
         setMessages([...messages, data]);
         console.log(data, "sent message response data");
-
       } catch (error) {
-
         console.log(error.message);
         toast({
           title: "Error Occured!",
@@ -136,6 +136,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 <UpdateGroupChatModal
                   fetchAgain={fetchAgain}
                   setFetchAgain={setFetchAgain}
+                  fetchMessages={fetchMessages}
                 />
               </>
             )}
@@ -151,7 +152,19 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             borderRadius="lg"
             overflowY="hidden"
           >
-            
+            {loading ? (
+              <Spinner
+                size="xl"
+                w={20}
+                h={20}
+                alignSelf="center"
+                margin="auto"
+              />
+            ) : (
+              <div className="messages">
+                <ScrollableChat messages={messages} />
+              </div>
+            )}
 
             <FormControl
               onKeyDown={sendMessage}
@@ -159,7 +172,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               isRequired
               mt={3}
             >
-              
               <Input
                 variant="filled"
                 bg="#E0E0E0"

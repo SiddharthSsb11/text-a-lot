@@ -22,7 +22,7 @@ import ChatContext from "../../Context/chat-context";
 import UserBadgeItem from "../userAvatar/UserBadgeItem";
 import UserListItem from "../userAvatar/UserListItem";
 
-const UpdateGroupChatModal = ({  fetchAgain, setFetchAgain }) => {
+const UpdateGroupChatModal = ({  fetchAgain, setFetchAgain, fetchMessages }) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -203,7 +203,7 @@ const UpdateGroupChatModal = ({  fetchAgain, setFetchAgain }) => {
       //leaveGroup clause //self UserBadgeItem cross
 
       setFetchAgain(!fetchAgain);
-      
+      fetchMessages(); //prop passsed down from singlechat //opt 
       setLoading(false);
     } catch (error) {
         

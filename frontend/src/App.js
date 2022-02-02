@@ -22,15 +22,16 @@ function App() {
       >
         <Suspense
           fallback={
-            <div className="center">
+            <div style={{margin:"auto"}}>
               {" "}
               {
                 <Spinner
-                  margin="auto"
-                  thickness="6px"
+                  thickness="9px"
                   speed="0.65s"
+                  w={30}
+                  h={30}
                   emptyColor="gray.200"
-                  color="red.500"
+                  color="gray.500"
                   size="xl"
                 />
               }{" "}
