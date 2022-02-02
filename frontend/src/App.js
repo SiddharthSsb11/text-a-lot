@@ -28,10 +28,10 @@ function App() {
                 <Spinner
                   thickness="9px"
                   speed="0.65s"
-                  w={30}
-                  h={30}
-                  emptyColor="gray.200"
-                  color="gray.500"
+                  w={50}
+                  h={50}
+                  emptyColor="blue.600"
+                  color="blue.800"
                   size="xl"
                 />
               }{" "}

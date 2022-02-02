@@ -47,19 +47,29 @@ app.use(errorHandler);
 }) */
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, console.log(`Server started on port ${PORT}`.yellow.bold));
+const server = app.listen(PORT, console.log(`Server started on port ${PORT}`.yellow.bold));
 
+
+const io = require("socket.io")(server, {
+  pingTimeout: 120000,
+  cors: {
+    origin: "http://localhost:3000",
+    // credentials: true,
+  },
+});
 
 io.on("connection", (socket) => {
   console.log("Connected to socket.io");
+
   socket.on("setup", (userData) => {
     socket.join(userData._id);
+    console.log(`Logged in user ${userData.name} joined he created room`);
     socket.emit("connected");
   });
 
   socket.on("join chat", (room) => {
     socket.join(room);
-    console.log("User Joined Room: " + room);
+    console.log("User Joined the chat Room: " + room);
   });
   
 
@@ -72,7 +82,24 @@ io.on("connection", (socket) => {
       if (user._id == newMessageRecieved.sender._id) return;
 
       socket.in(user._id).emit("message recieved", newMessageRecieved);
+      //.in-- inside user._id exclusive socket room joined-- emit this "message recieved" event ////mern-docs
+
+     
     });
   });
 
 });  
+
+////////////////////////////////////////////////////////////////
+////////////////////////////////
+//call join to subscribe the socket to a given channel/room
+
+/* io.on("connection", (socket) => {
+  socket.join("some room");
+}); */
+
+//broadcast to a room from a given socket --  every socket in the room excluding the sender will get the event.
+
+/* io.on("connection", (socket) => {
+  socket.to("some room").emit("some event");
+}); */

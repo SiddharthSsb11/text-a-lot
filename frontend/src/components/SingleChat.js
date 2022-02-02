@@ -114,8 +114,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     socket = io(ENDPOINT);
     socket.emit("setup", user);
     socket.on("connected", () => setSocketConnected(true));
-    socket.on("typing", () => setIsTyping(true));
-    socket.on("stop typing", () => setIsTyping(false));
+   
 
     // eslint-disable-next-line
   }, []);
@@ -123,8 +122,24 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   useEffect(() => {
     fetchMessages();
     //whwnever selctedChat changes, fetchAllMessages again for new selectedChat._id
+
+    //just to keep a track
+    selectedChatCompare = selectedChat;
+
     // eslint-disable-next-line
   }, [selectedChat]);
+
+  useEffect(() => {
+    socket.on("message recieved", (newMessageRecieved) => {
+      if ( !selectedChatCompare || selectedChatCompare._id !== newMessageRecieved.chat._id) {
+         // if chat is not selected or doesn't match current chat
+         console.log('notification icon check');
+      } else {
+        setMessages([...messages, newMessageRecieved]);
+      }
+    });
+  });
+
 
   return (
     <>
