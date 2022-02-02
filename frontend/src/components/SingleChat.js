@@ -12,13 +12,18 @@ import ProfileModal from "./miscellaneous/ProfileModal";
 import ScrollableChat from "./ScrollableChat";
 import UpdateGroupChatModal from "./miscellaneous/UpdateGroupChatModal";
 import ChatContext from "../Context/chat-context";
-/* const ENDPOINT = "http://localhost:5000"; // "https://textalot.herokuapp.com"; -> After deployment
-var socket, selectedChatCompare; */
+
+import io from "socket.io-client";
+
+const ENDPOINT = "http://localhost:5000"; // "https://textalot.herokuapp.com"; -> After deployment
+
+var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [newMessage, setNewMessage] = useState("");
+  const [socketConnected, setSocketConnected] = useState(false);
 
   const toast = useToast();
 
@@ -47,6 +52,9 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       setMessages(data);
       setLoading(false);
       console.log(data, "fetched messsages of the selected chat data");
+
+      socket.emit("join chat", selectedChat._id);
+
     } catch (error) {
       console.log(error.message);
       toast({
@@ -84,6 +92,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         );
 
         //setNewMessage("");
+        socket.emit("new message", data);
+
         setMessages([...messages, data]);
         console.log(data, "sent message response data");
       } catch (error) {
@@ -99,6 +109,16 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       }
     }
   };
+
+  useEffect(() => {
+    socket = io(ENDPOINT);
+    socket.emit("setup", user);
+    socket.on("connected", () => setSocketConnected(true));
+    socket.on("typing", () => setIsTyping(true));
+    socket.on("stop typing", () => setIsTyping(false));
+
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     fetchMessages();
