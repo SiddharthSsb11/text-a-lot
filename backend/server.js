@@ -63,15 +63,17 @@ io.on("connection", (socket) => {
 
   socket.on("setup", (userData) => {
     socket.join(userData._id);
-    console.log(`Logged in user ${userData.name} joined he created room`);
+    console.log(`Logged in user ${userData.name} joined the created room`);
     socket.emit("connected");
   });
 
   socket.on("join chat", (room) => {
     socket.join(room);
-    console.log("User Joined the chat Room: " + room);
+    console.log("User Joined the selectedChat Room: " + room);//room-selectedChatId
   });
   
+  socket.on("typing", (room) => socket.in(room).emit("typing"));
+  socket.on("stop typing", (room) => socket.in(room).emit("stop typing"));
 
   socket.on("new message", (newMessageRecieved) => {
     var chat = newMessageRecieved.chat;
@@ -84,8 +86,12 @@ io.on("connection", (socket) => {
       socket.in(user._id).emit("message recieved", newMessageRecieved);
       //.in-- inside user._id exclusive socket room joined-- emit this "message recieved" event ////mern-docs
 
-     
     });
+  });
+
+  socket.off("setup", () => {
+    console.log("USER DISCONNECTED");
+    socket.leave(userData._id);
   });
 
 });  
