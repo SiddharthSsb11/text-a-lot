@@ -22,7 +22,7 @@ please open an issue first to discuss what you would like to change.
 ```
 
 ### Few Screenshots
-
+![Homepage](/screenshots/Homepage.png "Homepage")
 
 ## Features
 
@@ -41,6 +41,7 @@ please open an issue first to discuss what you would like to change.
 
 <ul>
  <li>Login/Signup as well as Logout feature is added </li>
+ <li>Guest User Login added</li>
  <li>Error will be shown if the credentials are not correct</li>
 </ul>
 
