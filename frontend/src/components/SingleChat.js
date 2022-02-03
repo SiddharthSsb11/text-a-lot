@@ -17,7 +17,8 @@ import animationData from "../animations/typing.json";
 
 import io from "socket.io-client";
 
-const ENDPOINT = "http://localhost:5000"; // "https://textalot.herokuapp.com"; -> After deployment
+const ENDPOINT = "http://localhost:5000"; //development 
+//const ENDPOINT = "https://textalot.herokuapp.com"; //for deployment -production
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
@@ -30,7 +31,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   const toast = useToast();
 
-  const { selectedChat, setSelectedChat, user } = useContext(ChatContext);
+  const { selectedChat, setSelectedChat, user, notification, setNotification } = useContext(ChatContext);
   //console.log(selectedChat, "selectedChat in chatBox");
 
   const defaultOptions = {
@@ -79,6 +80,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     if (event.key === "Enter" && newMessage) {
 
       socket.emit("stop typing", selectedChat._id);
+
       try {
         const config = {
           headers: {
@@ -139,14 +141,18 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     // eslint-disable-next-line
   }, [selectedChat]);
 
+  //console.log(notification, 'notification Bellicon');
+
   useEffect(() => {
     socket.on("message recieved", (newMessageRecieved) => {
-      if (
-        !selectedChatCompare ||
-        selectedChatCompare._id !== newMessageRecieved.chat._id
-      ) {
+      if ( !selectedChatCompare || selectedChatCompare._id !== newMessageRecieved.chat._id) {
+
         // if chat is not selected or doesn't match current chat
-        console.log("notification icon check");
+        if (!notification.includes(newMessageRecieved)) {
+          setNotification([newMessageRecieved, ...notification]);
+          setFetchAgain(!fetchAgain); //updating our chats in our my chats on newMessageRecieved
+          console.log(notification, "notification bell-icon check");
+        }
       } else {
         setMessages([...messages, newMessageRecieved]);
       }
@@ -156,6 +162,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const typingHandler = (e) => {
     setNewMessage(e.target.value);
 
+    //typing animation code
     if (!socketConnected) return;
 
     if (!typing) {
@@ -163,6 +170,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       socket.emit("typing", selectedChat._id);
     }
 
+    //debounce/throttle function
     let lastTypingTime = new Date().getTime();
     var timerLength = 3000;
 
@@ -195,7 +203,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               icon={<ArrowBackIcon />}
               onClick={() => setSelectedChat("")}
             />
-            {!selectedChat.isGroupChat ? (
+            {messages && !selectedChat.isGroupChat ? (
               <>
                 {getSender(user, selectedChat.users)}
                 <ProfileModal user={getSenderFull(user, selectedChat.users)} />
