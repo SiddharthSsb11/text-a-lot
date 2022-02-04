@@ -17,8 +17,8 @@ import animationData from "../animations/typing.json";
 
 import io from "socket.io-client";
 
-//const ENDPOINT = "http://localhost:5000"; //development 
-const ENDPOINT = "https://textalot.herokuapp.com"; //for deployment -production
+const ENDPOINT = "http://localhost:5000"; //development 
+//const ENDPOINT = "https://textalot.herokuapp.com"; //for deployment -production
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {

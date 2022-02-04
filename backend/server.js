@@ -53,7 +53,8 @@ const server = app.listen(PORT, console.log(`Server started on port ${PORT}`.yel
 const io = require("socket.io")(server, {
   pingTimeout: 120000,
   cors: {
-    origin: "http://localhost:3000",
+    //origin: "http://localhost:3000", //development
+    origin: "https://textalot.herokuapp.com", //deployment
     credentials: true,
   },
 });
