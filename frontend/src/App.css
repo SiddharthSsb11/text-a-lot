@@ -4,7 +4,7 @@
 .App {
   min-height: 100vh;
   display: flex;
-  background-image: url("./bg4.png");
+  background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url("./bg4.png");
   background-position: center;
   background-size: cover;
 }
