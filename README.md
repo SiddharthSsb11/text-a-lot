@@ -24,7 +24,7 @@ please open an issue first to discuss what you would like to change.
 ### Few Screenshots
 
 ![Homepage](/screenshots/Homepage.png "Homepage")
-![Inbox](/screenshots/Inbox.png "Inbox")
+
 
 ## Features
 
