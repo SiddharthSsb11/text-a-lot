@@ -8,7 +8,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -39,7 +38,11 @@ const Login = () => {
         headers: { "Content-type": "application/json" },
       };
 
-      const { data } = await axios.post( "/api/user/login", { email, password }, config);
+      const { data } = await axios.post(
+        "/api/user/login",
+        { email, password },
+        config
+      );
 
       // console.log(JSON.stringify(data));
       toast({
@@ -53,7 +56,6 @@ const Login = () => {
       localStorage.setItem("userInformation", JSON.stringify(data));
       setLoading(false);
       navigate("/chats");
-
     } catch (error) {
       toast({
         title: "Error Occured!",
@@ -88,13 +90,19 @@ const Login = () => {
             placeholder="Enter password"
           />
           <InputRightElement width="4.5rem">
-            <Button colorScheme='cyan' h="1.75rem" size="sm" onClick={handleClick}>
+            <Button
+              colorScheme="cyan"
+              h="1.75rem"
+              size="sm"
+              onClick={handleClick}
+            >
               {show ? "Hide" : "Show"}
             </Button>
           </InputRightElement>
         </InputGroup>
       </FormControl>
-      <Button fontWeight="bold"
+      <Button
+        fontWeight="bold"
         colorScheme="teal"
         width="100%"
         style={{ marginTop: 15 }}
@@ -103,7 +111,8 @@ const Login = () => {
       >
         Login
       </Button>
-      <Button fontWeight="bold"
+      <Button
+        fontWeight="bold"
         variant="solid"
         colorScheme="yellow"
         width="100%"
@@ -113,6 +122,27 @@ const Login = () => {
         }}
       >
         Guest User Login
+      </Button>
+
+      <Button
+        fontWeight="bold"
+        variant="solid"
+        colorScheme="cyan"
+        width="100%"
+        onClick={() => {
+          //console.log("video");
+          //navigate("/https://dev.to/siddharthssb11")
+        }}
+      >
+        <a
+          href="https://dev.to/siddharthssb11"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Dev-Blogs"
+          width="100%"
+        >
+          Demo &nbsp;📽️&nbsp; Video &nbsp;&#10132;
+        </a>
       </Button>
     </VStack>
   );

@@ -1,4 +1,4 @@
-import React, {Suspense} from "react";
+import React, { Suspense } from "react";
 import "./App.css";
 //import {Button} from "@chakra-ui/button";
 //import HomePage from "./Pages/HomePage";
@@ -19,10 +19,15 @@ function App() {
       <ErrorBoundary
         FallbackComponent={ErrorFallback}
         onReset={() => window.location.reload(true)}
+        /*onReset={() =>
+          setTimeout(function () {
+            window.location.reload(true);
+          }, 1500)
+        }*/
       >
         <Suspense
           fallback={
-            <div style={{margin:"auto"}}>
+            <div style={{ margin: "auto" }}>
               {" "}
               {
                 <Spinner
