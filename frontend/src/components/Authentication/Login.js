@@ -125,7 +125,7 @@ const Login = () => {
       </Button>
 
       <Button
-        fontWeight="bold"
+        //fontWeight="bold"
         variant="solid"
         colorScheme="cyan"
         width="100%"
@@ -135,13 +135,13 @@ const Login = () => {
         }}
       >
         <a
-          href="https://dev.to/siddharthssb11"
+          href="https://www.loom.com/share/339d7abfe1924bbd8cb53c0cc3fac551"
           target="_blank"
           rel="noreferrer"
-          aria-label="Dev-Blogs"
+          aria-label="Demo-Video"
           width="100%"
         >
-          Demo &nbsp;📽️&nbsp; Video &nbsp;&#10132;
+          <strong>Demo&nbsp;📽️&nbsp;Video</strong>, Recommended to watch it on <strong><u>2x SPEED</u></strong>&nbsp;&#10132;
         </a>
       </Button>
     </VStack>
