@@ -23,8 +23,9 @@ please open an issue first to discuss what you would like to change.
 
 ### Few Screenshots
 
-![Homepage](/screenshots/Homepage.png "Homepage")
-
+![Homepage](/screenshots/1.png "Homepage")
+![Chatpage](/screenshots/2.png "Chatpage")
+![Groupchat](/screenshots/3.png "Groupchat")
 
 ## Features
 
