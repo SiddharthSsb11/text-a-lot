@@ -17,7 +17,6 @@ const allUsers = asyncHandler(async (req, res) => {
     : {};
 
   //console.log(keyword,'search keyword'); //{} 
-  
   //user id from protect MW
   const users = await User.find(keyword).find({ _id: { $ne: req.user._id } }); 
   //not including the logged in user

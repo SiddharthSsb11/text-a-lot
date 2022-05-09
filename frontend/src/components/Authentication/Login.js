@@ -141,7 +141,7 @@ const Login = () => {
           aria-label="Demo-Video"
           width="100%"
         >
-          <strong>Demo&nbsp;📽️&nbsp;Video</strong>, Recommended to watch it on <strong><u>2x SPEED</u></strong>&nbsp;&#10132;
+          <strong>Demo&nbsp;📽️&nbsp;Video</strong>, Recommended <strong><u>2x SPEED</u></strong>&nbsp;&#10132;
         </a>
       </Button>
     </VStack>
